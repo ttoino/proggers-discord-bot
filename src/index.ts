@@ -28,6 +28,14 @@ const main = async () => {
 
 client.once("ready", () => {
     console.log("Ready!");
+
+    client.user?.setPresence({
+        status: "online",
+        activity: {
+            name: "jas help",
+            type: "PLAYING",
+        },
+    });
 });
 
 client.on("message", (message) => {
