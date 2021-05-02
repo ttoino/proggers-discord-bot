@@ -148,6 +148,10 @@ export class DiscordInterface {
     }
 
     async start() {
+        console.debug(
+            `${this.user.username} started playing ${this.game.maze.name}`
+        );
+
         await this.displayMaze();
 
         while (!this.game.isOver()) {
@@ -156,5 +160,11 @@ export class DiscordInterface {
                 await this.displayMaze();
             }
         }
+
+        console.debug(
+            `${this.user.username} ${this.game.player.alive ? "won" : "lost"} ${
+                this.game.maze.name
+            }`
+        );
     }
 }

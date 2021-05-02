@@ -5,8 +5,7 @@ dotenv.config();
 import Discord from "discord.js";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { Command } from "./types";
-import { loadMazeCommand, playCommand, testCommand } from "./commands";
+import { commands } from "./commands";
 
 export const client = new Discord.Client();
 
@@ -31,12 +30,6 @@ client.once("ready", () => {
     console.log("Ready!");
 });
 
-const commands: { [key: string]: Command } = {
-    test: testCommand,
-    maze: loadMazeCommand,
-    play: playCommand,
-};
-
 client.on("message", (message) => {
     // Ignore bots
     if (message.author.bot) return;
@@ -47,7 +40,7 @@ client.on("message", (message) => {
     args.shift(); // Remove "jas"
     const command = args.shift();
 
-    if (command && command in commands) commands[command](message, ...args);
+    if (command && command in commands) commands[command][0](message, ...args);
 });
 
 main();
